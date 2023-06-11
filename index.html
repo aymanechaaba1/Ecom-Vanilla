@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="src/script.js"></script>
+    <title>Ecom Vanilla</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- HEADER -->
+      <header class="">
+        <nav class="flex items-center justify-between p-7">
+          <a href="#">
+            <img
+              src="https://cdn.shopify.com/s/files/1/0612/2477/9832/files/logo40.png?v=1677092556&width=500"
+              alt="Logo"
+              class="w-40"
+            />
+          </a>
+
+          <!-- <div class="flex items-center gap-5">
+            <a href="#products" class="text-gray-600">Products</a>
+          </div> -->
+          <div class="flex items-center gap-4">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="search-btn w-6 h-6 cursor-pointer"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+              />
+            </svg>
+            <a href="#cart" class="relative">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="cart-btn w-6 h-6 cursor-pointer"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
+                />
+              </svg>
+              <div
+                class="rounded-full bg-yellow-400 text-center font-bold text-white text-xs w-4 h-4 absolute top-0 left-3"
+              >
+                <span class="total-cart-items align-middle">0</span>
+              </div>
+            </a>
+          </div>
+        </nav>
+      </header>
+      <!-- ADD PRODUCT FORM -->
+      <div
+        class="overlay absolute top-0 left-0 w-full h-screen bg-slate-300/30 hidden"
+      ></div>
+      <form
+        class="form-add-product absolute top-1/2 left-1/2 w-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-8 rounded-lg flex-col gap-5 shadow-md hidden grid-cols-2"
+      >
+        <label for="product_img">Product Image</label>
+        <!-- <button
+            class="btn-upload-product-img flex-1 border hover:bg-slate-50 py-2 px-4 rounded-md shadow-sm"
+          >
+            Upload Image
+          </button>
+          <input type="file" class="input-upload-product-img hidden" /> -->
+        <input
+          type="text"
+          class="flex-1 outline-none py-2 px-4 border rounded-md focus:border-blue-600"
+          placeholder="Img Url"
+          name="product_img"
+        />
+
+        <label for="product_title">Product Title</label>
+        <input
+          type="text"
+          class="flex-1 outline-none py-2 px-4 border rounded-md focus:border-blue-600"
+          placeholder=""
+          name="product_title"
+        />
+
+        <label for="product_price">Product Price</label>
+        <input
+          type="text"
+          class="flex-1 outline-none py-2 px-4 border rounded-md focus:border-blue-600"
+          placeholder="in USD"
+          name="product_price"
+        />
+        <label for="product_desc">Product Description</label>
+        <textarea
+          class="flex-1 outline-none py-2 px-4 border rounded-md focus:border-blue-600"
+          name="product_desc"
+          id=""
+          cols="20"
+          rows="5"
+        ></textarea>
+
+        <!-- BTN SUBMIT -->
+        <button
+          type="submit"
+          class="btn-submit m-auto border rounded-md hover:shadow-md transition-all ease-in py-2 px-4 col-span-full"
+        >
+          Submit
+        </button>
+      </form>
+      <!-- END ADD PRODUCT FORM -->
+
+      <div class="app-container">
+        <div class="flex items-center justify-between px-7 py-4">
+          <h2 class="text-2xl">All Products</h2>
+          <!-- ADD PRODUCT BTN -->
+          <button
+            class="btn-add-product border font-medium shadow-sm px-4 py-2 rounded-md"
+          >
+            Add Product
+          </button>
+        </div>
+        <div class="products grid grid-cols-4 gap-5 p-7"></div>
+      </div>
+    </div>
+  </body>
+</html>
