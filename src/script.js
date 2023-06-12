@@ -82,14 +82,14 @@ const ProductPreview = ({ id = 0, imgUrl, title, price }) => {
   `;
 };
 
-const ProductPage = ({ id, imgUrl, title, price, desc }) => {
+const ProductPage = ({ id, imgUrl, title, price, desc, quantity }) => {
   return `
     <!-- PRODUCT PAGE -->
     <div class="product product-page flex gap-10 p-7 m-auto max-w-full" data-product-id=${id}>
       <img
         src=${imgUrl}
         alt=${title}
-        class="rounded-md w-1/2"
+        class="rounded-md w-1/2 object-cover"
       />
       <div class="product-info flex flex-1 flex-col gap-4">
         <h1 class="product-title text-5xl">${title}</h1>
@@ -98,7 +98,7 @@ const ProductPage = ({ id, imgUrl, title, price, desc }) => {
           <label for="product-quantity">Quantity</label>
           <div class="flex justify-between rounded-md border py-3 px-5">
             <button class="btn-increment-quantity text-xl">+</button>
-            <div class="quantity-val font-bold">1</div>
+            <div class="quantity-val font-bold">${quantity}</div>
             <button class="btn-decrement-quantity text-xl">-</button>
           </div>
         </div>
@@ -386,6 +386,7 @@ const handleShowProductPage = (e) => {
     title: productObj.productTitle,
     price: productObj.productPrice,
     desc: productObj.productDesc,
+    quantity: productObj.productQuantity,
   });
 
   // Render it
@@ -423,11 +424,6 @@ const handleAddToCart = (e) => {
 
   const popupEl = document.querySelector('.popup');
 
-  const hideNotification = () => {
-    popupEl.classList.remove('fixed');
-    popupEl.classList.add('hidden');
-  };
-
   const addToCart = () => {
     // push  product to cart
     state.cart.push(productObj);
@@ -436,9 +432,8 @@ const handleAddToCart = (e) => {
     const NotificationPopupEl = NotificationPopup({
       message: 'Product Added Successfuly',
     });
-    if (popupEl) return;
-    render(NotificationPopupEl, appContainerEl);
-    // setTimeout(hideNotification, 2000);
+
+    !popupEl && render(NotificationPopupEl, appContainerEl);
 
     // increment total cart items
     totalCartItemsEl.textContent = state.cart.length;
@@ -483,6 +478,9 @@ const handleRemoveItemFromCart = (e) => {
   // remove product from ui
   clickedProduct.remove();
 
+  // update total cart val
+  totalCartItemsEl.textContent = state.cart.length;
+
   // update cart subtotal
   const subtotal = state.cart.reduce(
     (sum, product) => (sum += product.productPrice * product.productQuantity),
@@ -490,6 +488,8 @@ const handleRemoveItemFromCart = (e) => {
   );
   state.cart.subtotal = subtotal;
   subtotalValEl.textContent = formatCurrency(state.cart.subtotal);
+
+  //TODO: show success notification
 };
 
 // Init
